@@ -498,7 +498,7 @@ def train(run_name, start_epoch, stop_epoch, img_w):
     #                     initial_epoch=start_epoch)
     import cv2
 
-    img = cv2.imread('im4.png')
+    img = cv2.imread('imeng.png')
     img = cv2.resize(img, (512, 64))
 
     img=np.asarray(img)

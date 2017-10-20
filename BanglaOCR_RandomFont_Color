@@ -202,7 +202,7 @@ class TextImageGenerator(keras.callbacks.Callback):
 
     def __init__(self, monogram_file, bigram_file, minibatch_size,
                  img_w, img_h, downsample_factor, val_split,type_t,
-                 absolute_max_string_len=64):
+                 absolute_max_string_len=98):
 
         self.minibatch_size = minibatch_size
         self.img_w = img_w

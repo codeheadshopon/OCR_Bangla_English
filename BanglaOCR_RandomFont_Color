@@ -113,7 +113,18 @@ def paint_text(text, w, h, rotate=False, ud=False, multi_fonts=False):
         border_w_h = (4, 4)
         if box[2] > (w - 2 * border_w_h[1]) or box[3] > (h - 2 * border_w_h[0]):
             print(text)
-            raise IOError('Could not fit string into image. Max char count is too large for given image width.')
+            print(len(text))
+            print("Could Not Fit")
+            ind=0
+            for i in text:
+                if(i==" "):
+                    break
+                ind += 1
+            text=text[0:ind]
+            # text=text[0:len(text)/2]
+            box = context.text_extents(text)
+
+            # raise IOError('Could not fit string into image. Max char count is too large for given image width.')
 
         # teach the RNN translational invariance by
         # fitting text box randomly on canvas, with some room to rotate
@@ -202,7 +213,7 @@ class TextImageGenerator(keras.callbacks.Callback):
 
     def __init__(self, monogram_file, bigram_file, minibatch_size,
                  img_w, img_h, downsample_factor, val_split,type_t,
-                 absolute_max_string_len=98):
+                 absolute_max_string_len=164):
 
         self.minibatch_size = minibatch_size
         self.img_w = img_w
@@ -545,7 +556,7 @@ def train(run_name, start_epoch, stop_epoch, img_w,type_t):
 if __name__ == '__main__':
     run_name = datetime.datetime.now().strftime('%Y:%m:%d:%H:%M:%S')
     type_t="singleword"
-    train(run_name, 0, 20, 512,type_t)
+    train(run_name, 0, 20, 256,type_t)
     type_t="other"
     # increase to wider images and start at epoch 20. The learned weights are reloaded
     train(run_name, 20, 100, 512,type_t)

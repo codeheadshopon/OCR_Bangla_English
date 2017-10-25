@@ -413,6 +413,7 @@ def Bangla():
         with open(file + str(filenumber) + ".txt", 'rt') as f:
             for line in f:
                 if(len(line)<=60):
+                    line=line[0:len(line)-1]
                     wordlist.append(line)
 
     wordlist = list(set(wordlist))
@@ -433,7 +434,9 @@ def Bangla():
             # print(string)
             arr = string.split(" ")
             for j in arr:
-                if (len(j) <= 60):
+                if(j!=""):
+                    if (len(j) <= 60):
+                        j = j[0:len(j) - 1]
                         wordlist.append(j)
 
     # print(len(wordlist))
@@ -497,4 +500,3 @@ def makeData(num_words,type):
 
     return Stringlist
 
-# makeData(1000,"else")

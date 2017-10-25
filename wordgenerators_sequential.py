@@ -413,7 +413,8 @@ def Bangla():
         with open(file + str(filenumber) + ".txt", 'rt') as f:
             for line in f:
                 if(len(line)<=60):
-                    line=line[0:len(line)-1]
+                    if(line[len(line)-1]=='\n'):
+                        line=line[0:len(line)-1]
                     wordlist.append(line)
 
     wordlist = list(set(wordlist))
@@ -436,7 +437,8 @@ def Bangla():
             for j in arr:
                 if(j!=""):
                     if (len(j) <= 60):
-                        j = j[0:len(j) - 1]
+                        if (j[len(j) - 1] == '\n'):
+                            j = j[0:len(j) - 1]
                         wordlist.append(j)
 
     # print(len(wordlist))
@@ -450,14 +452,22 @@ def English():
         for line in f:
             arr = line.split(" ")
             for j in arr:
-                if(len(j)<=12):
-                    engwords.append(j)
+                if(j!=""):
+                    if(len(j)<=12):
+                        if(j[len(j)-1]=='\n'):
+                            j=j[0:len(j)-1]
+                        engwords.append(j)
     with open("texts/wordlist_mono_clean.txt", 'rt') as f:
         for line in f:
             arr = line.split(" ")
             for j in arr:
-                if(len(j)<=12):
-                    engwords.append(j)
+                if(j!=""):
+                    if(len(j)<=12):
+
+                        if (j[len(j) - 1] == '\n'):
+                            j = j[0:len(j) - 1]
+
+                        engwords.append(j)
     engwords = list(set(engwords))
     return engwords
 
@@ -466,7 +476,9 @@ def makeData(num_words,type):
     Bang = Bangla()
 
     Bang.remove("")
+
     Eng = English()
+    Eng.remove("")
     Stringlist = []
     puncuation = ".,;\"-\' :"
     for word in range(num_words):
@@ -499,4 +511,5 @@ def makeData(num_words,type):
         # print(len(string))
 
     return Stringlist
+
 

@@ -173,8 +173,7 @@ def paint_text(text, w, h, rotate=False, ud=True, multi_fonts=False):
         if (Flag == 0):
             text = i
             img_1 = code.paint_text(text, 128, 64,Size)
-            imsave('test_image.png', img_1)
-            im = Image.open('test_image.png')
+            im = Image.fromarray(np.uint8(img_1 * 255))
             offset = (Start, (bg_h - img_h) / 2)
             background.paste(im, offset)
             Start += 128
@@ -512,7 +511,7 @@ class VizCallback(keras.callbacks.Callback):
 def train(run_name, start_epoch, stop_epoch, img_w,type_t):
     # Input Parameters
     img_h = 64
-    words_per_epoch = 400
+    words_per_epoch = 16000
     val_split = 0.2
     val_words = int(words_per_epoch * (val_split))
 

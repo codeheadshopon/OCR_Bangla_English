@@ -168,7 +168,7 @@ def paint_text(text, w, h, rotate=False, ud=True, multi_fonts=False):
     splitwords = splitwords[0:len(splitwords) - 1]
 
 
-    Size = random.randint(25,40)
+    Size = random.randint(20,25)
     for i in splitwords:
         if (Flag == 0):
             text = i
@@ -193,8 +193,8 @@ def paint_text(text, w, h, rotate=False, ud=True, multi_fonts=False):
                 img = Image.open(ImageName)
 
                 # img=Image.open('a.png')
-                img = img.resize((Size+6, Size+6), Image.ANTIALIAS)
-                offset = (Start, (bg_h - img_h) / 2)
+                img = img.resize((Size+8, Size+8), Image.ANTIALIAS)
+                offset = (Start, (bg_h - img_h) / 3)
                 background.paste(img, offset)
 
                 Start += Size
@@ -229,7 +229,7 @@ def shuffle_mats_or_lists(matrix_list, stop_ind=None):
     return ret
 
 def FindOutPutShape():
-    return 51  # Another Joint Charachter Khiyo Addeed
+    return 327  # Another Joint Charachter Khiyo Addeed
 # Translation of characters to unique integer values
 
 def text_to_labels(text):
@@ -511,7 +511,7 @@ class VizCallback(keras.callbacks.Callback):
 def train(run_name, start_epoch, stop_epoch, img_w,type_t):
     # Input Parameters
     img_h = 64
-    words_per_epoch = 16000
+    words_per_epoch = 400
     val_split = 0.2
     val_words = int(words_per_epoch * (val_split))
 

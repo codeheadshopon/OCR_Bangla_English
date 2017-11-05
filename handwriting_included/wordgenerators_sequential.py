@@ -14,6 +14,7 @@ def GenerateRandomBanglaCharsOnly(num_words):
     for i in range(len(banglachars) / 3):
         charlist.append(banglachars[i * 3:(i + 1) * 3])
     stringlist = []
+    stringlist = []
 
     for i in range(num_words):
         NumberofAlphabets = random.randint(1, 7)
@@ -412,7 +413,7 @@ def Bangla():
     for filenumber in range(1, 5):
         with open(file + str(filenumber) + ".txt", 'rt') as f:
             for line in f:
-                if(len(line)<=60):
+                if(len(line)<=15):
                     if(line[len(line)-1]=='\n'):
                         line=line[0:len(line)-1]
                     wordlist.append(line)
@@ -436,7 +437,7 @@ def Bangla():
             arr = string.split(" ")
             for j in arr:
                 if(j!=""):
-                    if (len(j) <= 60):
+                    if (len(j) <= 15):
                         if (j[len(j) - 1] == '\n'):
                             j = j[0:len(j) - 1]
                         wordlist.append(j)
@@ -546,107 +547,38 @@ def basiWords():
     return basicWords
 
 def newDataset(num_words,type):
-    Bang=basiWords()
+    Bang_1=basiWords()
+    Bang_2=Bangla()
     text=""
     stringlist=[]
     for totalwords in range(num_words):
         text=""
-        numwords = random.randint(2, 4)
+        numwords = random.randint(2, 5)
         for i in range(numwords):
-            index= random.randint(0,len(Bang)-1)
-            text+=Bang[index]
-            text+=" "
+            if(i%2==0):
+                index = random.randint(0, len(Bang_2) - 1)
+                text += Bang_2[index]
+                text += " "
+            else:
+                index= random.randint(0,len(Bang_1)-1)
+                text+=Bang_1[index]
+                text+=" "
         # print(text)
 
         stringlist.append(text)
     return stringlist
 def labelingNewDataset(text):
 
-    Dict = {'অ': 0,
-            'আ': 1,
-            'ই': 2,
-            'ঈ': 3,
-            'উ': 4,
-            'ঊ': 5,
-            'ঋ': 6,
-            'এ': 7,
-            'ঐ': 8,
-            'ও': 9,
-            'ঔ': 10,
-            'ক': 11,
-            'খ': 12,
-            'গ': 13,
-            'ঘ': 14,
-            'ঙ': 15,
-            'চ': 16,
-            'ছ': 17,
-            'জ': 18,
-            'ঝ': 19,
-            'ঞ': 20,
-            'ট': 21,
-            'ঠ': 22,
-            'ড': 23,
-            'ঢ': 24,
-            'ণ': 25,
-            'ত': 26,
-            'থ': 27,
-            'দ': 28,
-            'ধ': 29,
-            'ন': 30,
-            'প': 31,
-            'ফ': 32,
-            'ব': 33,
-            'ভ': 34,
-            'ম': 35,
-            'য': 36,
-            'র': 37,
-            'ল': 38,
-            'শ': 39,
-            'ষ': 40,
-            'স': 41,
-            'হ': 42,
-            'ড়': 43,
-            'ঢ়': 44,
-            'য়': 45,
-            'ঃ':46,
-            'ৎ' : 47,
-            'ং' : 48
-            }
-    banglachars = "অআইঈউঊঋএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহড়ঢ়য়ঃৎং"
+    return decodetheData(text)
 
-    chars = []
-    for i in range(0,len(banglachars),3):
-        chars.append(banglachars[i:i+3])
-    splitwords=[]
-    PrevInd=0
-    for i in range(len(text)):
-        if text[i] == ' ':
-            splitwords.append(text[PrevInd:i])
-            PrevInd = i + 1
-            # for i in range(PrevInd,i,3):
-        if i == len(text) - 1:
-            splitwords.append(text[PrevInd:i + 1])
-    labels=[]
-    WordCounter=0
-    for i in splitwords:
-        WordCounter+=1
-        for j in range(0,len(i),3):
-            labels.append(Dict[i[j:j+3]])
-        if(WordCounter<len(splitwords)):
-            labels.append(49)
-    return labels
 def decodeNewDataset(labels):
-    banglachars = "অআইঈউঊঋএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহড়ঢ়য়ঃৎং "
-    chars = []
-    for i in range(0,len(banglachars),3):
-        chars.append(banglachars[i:i + 3])
-
-    # print(labels)
+    chars = getTotalData()
+    print(len(chars))
     text=""
-    # print(labels)
     for i in labels:
 
-        if(i!=50):
+        if(i!=326):
             text+=chars[i]
     return text
-# print(newDataset(10,"ab"))
+
+Bangla()

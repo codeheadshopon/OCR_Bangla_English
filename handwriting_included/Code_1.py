@@ -45,9 +45,7 @@ def paint_text(text, w, h, fontsize, rotate=False, ud=True, multi_fonts=False):
         for j in chars:
             if j==ch:
                 itsoke = 0
-        if(itsoke):
-            print("Something fishy with this text")
-            print(text)
+
     # text="অ"
     surface = cairo.ImageSurface(cairo.FORMAT_RGB24, w, h)
     import random
@@ -83,7 +81,6 @@ def paint_text(text, w, h, fontsize, rotate=False, ud=True, multi_fonts=False):
                         break
                 text=text[0:idx]
                 box = context.text_extents(text)
-
             box = context.text_extents(text)
 
             # raise IOError('Could not fit string into image. Max char count is too large for given image width.')
